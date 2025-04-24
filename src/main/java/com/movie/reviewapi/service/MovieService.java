@@ -1,7 +1,6 @@
 package com.movie.reviewapi.service;
 
 import com.movie.reviewapi.model.Movie;
-import com.movie.reviewapi.model.Review;
 import com.movie.reviewapi.repository.MovieRepository;
 import com.movie.reviewapi.repository.ReviewRepository;
 import org.springframework.stereotype.Service;

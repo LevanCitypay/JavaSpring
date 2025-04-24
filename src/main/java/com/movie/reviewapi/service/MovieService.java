@@ -37,6 +37,9 @@ public class MovieService {
         review.setMovie(movie);
         return reviewRepository.save(review);
     }
+    public boolean movieExistsByTitle(String title) {
+        return movieRepository.existsByTitleIgnoreCase(title);
+    }
 
     public void deleteMovie(Long id) {
         movieRepository.deleteById(id);

@@ -1,7 +1,6 @@
 package com.movie.reviewapi.controller;
 
 import com.movie.reviewapi.model.Movie;
-import com.movie.reviewapi.model.Review;
 import com.movie.reviewapi.service.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +31,14 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie createMovie(@Valid @RequestBody Movie movie) {
-        return movieService.saveMovie(movie);
-    }
+    public ResponseEntity<?> createMovie(@Valid @RequestBody Movie movie) {
+        if (movieService.movieExistsByTitle(movie.getTitle())) {
+            return ResponseEntity.badRequest()
+                    .body("Movie with title '" + movie.getTitle() + "' already exists.");
+        }
 
-    @PostMapping("/{id}/reviews")
-    public Review addReview(@PathVariable Long id, @Valid @RequestBody Review review) {
-        return movieService.addReview(id, review);
+        Movie savedMovie = movieService.saveMovie(movie);
+        return ResponseEntity.ok(savedMovie);
     }
 
     @DeleteMapping("/{id}")

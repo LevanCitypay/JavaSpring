@@ -32,11 +32,6 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public Review addReview(Long movieId, Review review) {
-        Movie movie = movieRepository.findById(movieId).orElseThrow();
-        review.setMovie(movie);
-        return reviewRepository.save(review);
-    }
     public boolean movieExistsByTitle(String title) {
         return movieRepository.existsByTitleIgnoreCase(title);
     }

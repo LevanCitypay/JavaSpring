@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <meta charset="UTF-8">
+        <title th:text="#{login.title}">Login</title>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian&display=swap" rel="stylesheet">
+
+    <title th:text="#{login.title}">Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 0.6rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .lang-switch {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+
+    <div class="lang-switch">
+        <p th:text="#{language.switch}">Change Language</p>
+        <a href="?lang=ka">ქართული</a> |
+        <a href="?lang=en">English</a> |
+        <a href="?lang=es">Español</a>
+    </div>
+
+    <h2 th:text="#{login.title}">Login</h2>
+    <form th:action="@{/login}" method="post">
+        <label for="username" th:text="#{login.username}">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password" th:text="#{login.password}">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" th:text="#{login.button}">Login</button>
+    </form>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <p style="text-align:center; margin-top: 1rem;">
+        <span th:text="#{login.register.message}">Don't have an account?</span>
+        <a href="/register" th:text="#{login.register.link}">Register here</a>
+    </p>
+
+</div>
+</body>
+</html>

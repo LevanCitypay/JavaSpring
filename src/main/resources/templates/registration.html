@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{register.title}">Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Georgian', sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 0.6rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .lang-switch {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+
+    <div class="lang-switch">
+        <p th:text="#{language.switch}">Change Language</p>
+        <a href="?lang=ka">ქართული</a> |
+        <a href="?lang=en">English</a> |
+        <a href="?lang=es">Español</a>
+    </div>
+
+    <h2 th:text="#{register.title}">Register</h2>
+    <form th:action="@{/register}" method="post">
+        <label for="username" th:text="#{register.username}">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email" th:text="#{register.email}">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password" th:text="#{register.password}">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" th:text="#{register.button}">Register</button>
+    </form>
+
+    <p style="text-align:center; margin-top: 1rem;">
+        <span th:text="#{register.haveaccount}">Already have an account?</span>
+        <a href="/login" th:text="#{register.loginlink}">Login here</a>
+    </p>
+
+</div>
+</body>
+</html>

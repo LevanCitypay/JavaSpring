@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Welcome</title>
+    <style>
+        body {
+            background: #cce7f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .card h2 {
+            font-size: 24px;
+        }
+        .card p {
+            font-size: 16px;
+            margin-top: 1rem;
+        }
+        .logout-button {
+            margin-top: 2rem;
+            padding: 0.6rem 1.5rem;
+            background-color: #ff4d4d;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>Welcome, <span sec:authentication="name"></span>!</h2>
+    <p>You have successfully logged in to your account.</p>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-button">Logout</button>
+    </form>
+
+</div>
+</body>
+</html>

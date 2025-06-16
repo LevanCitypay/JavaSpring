@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>System Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h2>JVM Memory Usage</h2>
+<canvas id="memoryChart" width="400" height="200"></canvas>
+
+<h2>CPU Usage</h2>
+<canvas id="cpuChart" width="400" height="200"></canvas>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const memoryValue = [[${memory != null and memory.measurements != null ? memory.measurements[0].value : 0}]];
+    const cpuValue = [[${cpu != null and cpu.measurements != null ? cpu.measurements[0].value : 0}]];
+
+    const memoryCtx = document.getElementById('memoryChart').getContext('2d');
+    new Chart(memoryCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Heap Memory'],
+            datasets: [{
+                label: 'Bytes Used',
+                data: [memoryValue],
+                backgroundColor: 'rgba(75, 192, 192, 0.6)'
+            }]
+        },
+        options: {
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+
+    const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+    new Chart(cpuCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Used CPU (%)', 'Free'],
+            datasets: [{
+                label: 'CPU Usage',
+                data: [cpuValue * 100, (1 - cpuValue) * 100],
+                backgroundColor: ['#ff6384', '#36a2eb']
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: { callbacks: { label: (ctx) => ctx.raw.toFixed(2) + '%' } }
+            }
+        }
+    });
+    /*]]>*/
+</script>
+</body>
+</html>

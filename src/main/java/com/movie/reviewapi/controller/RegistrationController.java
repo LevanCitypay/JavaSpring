@@ -46,6 +46,7 @@ public class RegistrationController {
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password)); // ✅ Encrypted password
+        user.setRole("USER"); // ✅ Default role assigned here
 
         userRepository.save(user);
 
